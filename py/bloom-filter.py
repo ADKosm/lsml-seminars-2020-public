@@ -1,6 +1,9 @@
-import random
+import argparse
 import csv
+import random
 import sys
+
+MEMORY = 5000
 
 
 def generate_hash(size):
@@ -11,14 +14,21 @@ def generate_hash(size):
 
     return _hash
 
-MEMORY = 5000
 
-stream = map(lambda x: int(x[8]), csv.reader(iter(sys.stdin.readline, '')))
+def main(query_file_path):
+    stream = map(lambda x: int(x[8]), csv.reader(iter(sys.stdin.readline, '')))
 
-for element in stream:
-    pass # DO IT
+    for element in stream:
+        pass # DO IT
 
-query_file_path = sys.argv[1]
-with open(query_file_path, "r") as f:
-    for query in map(int, f):
-        print("NO") # DO NOT FORGET TO ALSO UPDATE THIS
+    with open(query_file_path, "r") as f:
+        for query in map(int, f):
+            print("NO") # DO NOT FORGET TO ALSO UPDATE THIS
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('queries', metavar='query', type=str, nargs='?',
+                        help='path to queries file')
+    args = parser.parse_args()
+    main(args.queries)
